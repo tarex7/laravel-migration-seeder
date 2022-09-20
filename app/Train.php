@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Train extends Model
 {
     public function onTime() {
-        return ($this->In_orario) ? 'Si' : 'No';
+        return ($this->in_orario) ? 'Si' : 'No';
     }
 
     public function trainDeleted() {
-        return ($this->Cancellato) ? 'Si' : 'No';
+        return ($this->cancellato) ? 'Si' : 'No';
+    }
+
+    public function getTime($v) {
+        return substr( $this->$v, 0, 5 );
     }
 }

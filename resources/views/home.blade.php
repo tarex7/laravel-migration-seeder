@@ -2,7 +2,6 @@
 
 @section('main')
 
-@dump($trains);
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
         
@@ -43,16 +42,16 @@
             <tbody>
                 @foreach ($trains as $train)
                     
-                <tr>
-                  <td scope="row">{{$train->Azienda}}</td>
-                  <td scope="row">{{$train->Stazione_di_partenza}}</td>
-                  <td scope="row">{{$train->Stazione_di_arrivo}}</td>
-                  <td scope="row">{{$train->Orario_di_partenza}}</td>
-                  <td scope="row">{{$train->Orario_di_arrivo}}</td>
-                  <td scope="row">{{$train->Codice_Treno}}</td>
-                  <td scope="row">{{$train->Numero_Carrozze}}</td>
+                <tr class="@if($train->cancellato) bg-danger  @endif">
+                  <td scope="row">{{$train->azienda}}</td>
+                  <td scope="row">{{$train->stazione_di_partenza}}</td>
+                  <td scope="row">{{$train->stazione_di_arrivo}}</td>
+                  <td scope="row">{{$train->getTime('orario_di_partenza')}}</td>
+                  <td scope="row">{{$train->getTime('orario_di_arrivo')}}</td>
+                  <td scope="row">{{$train->codice_treno}}</td>
+                  <td scope="row">{{$train->numero_carrozze}}</td>
                   <td scope="row">{{$train->onTime()}}</td>
-                  <td scope="row">{{$train->trainDeleted()}}</td>
+                  @if($train->cancellato) <td class="@if($train->cancellato) text-white @endif" scope="row">{{$train->trainDeleted()}}</td>@endif
                  
                 </tr>
                 @endforeach
